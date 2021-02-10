@@ -12,7 +12,7 @@ int main()
 
     // << insert into stream (sys.out)
     cout << "How many hours did you work? "; // sys out
-    // >> write from steam (sys.in)
+    // >> write from stream (sys.in)
     cin >> hours; // sys in, auto parses num
 
     cout << "How much do you get paid per hour? "; // sys out
