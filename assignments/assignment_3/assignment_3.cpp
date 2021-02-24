@@ -1,0 +1,46 @@
+#include <iostream>
+#include <iomanip>
+#include <string>
+using namespace std;
+
+int main()
+{
+    cout << "My Calculator" << endl;
+    cout << "1. Addition" << endl;
+    cout << "2. Subtraction" << endl;
+    cout << "3. Multiplication" << endl;
+    cout << "4. Division" << endl;
+    cout << "5. Quit" << endl;
+
+    cout << "Enter your choice: (1-5):" << endl;
+    short i;
+    cin >> i;
+
+    float x, y;
+    cout << "Enter the first number:" << endl;
+    cin >> x;
+    cout << "Enter the second number:" << endl;
+    cin >> y;
+
+    cout << fixed << setprecision(2);
+    switch (i) {
+        case 1:
+            cout << x + y;
+            break;
+        case 2:
+            cout << x - y;
+            break;
+        case 3:
+            cout << x * y;
+            break;
+        case 4:
+            cout << (y == 0 ? "Divide by zero error" : to_string(x / y));
+            break;
+        case 5:
+            return 0;
+        default:
+            cout << "Invalid entry";
+            break;
+    }
+    return 0;
+}
