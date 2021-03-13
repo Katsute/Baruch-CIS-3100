@@ -28,7 +28,7 @@ int main()
 
                 see https://stackoverflow.com/a/5864560
             */
-        } while (choice < 1 || choice > 5); // input validation not needed b/c null is 0
+        } while (choice < 1 || choice > 5);
         // ^ continue until integer input and between 1-5
 
         if (choice == 5)
