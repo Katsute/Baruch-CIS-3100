@@ -20,7 +20,7 @@ void decr(int& v) { // can also be (int &v)
 
 // global constants
 
-const int pi = 3.14;
+const double pi = 3.14;
 
 // static
 

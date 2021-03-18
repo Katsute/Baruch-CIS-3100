@@ -12,7 +12,7 @@ int main()
     // string & concatenation
     string str = "string";
     int size = str.length();
-    str += " contat";
+    str += " concat";
 
     /*
         math (requires import)
@@ -20,7 +20,7 @@ int main()
 
         generally same method names as Java
     */
-    
+
     // randoms
     int seed;
 

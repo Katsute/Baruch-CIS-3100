@@ -44,7 +44,7 @@ int main()
 
     // stream manipulators
     cout << endl << setw(4) << "50" << "45"; // set minimum width to use for columns
-    cout << endl << setprecision(4) << fixed << 50.0; // set amount of places to display (doens't work for ints)
+    cout << endl << setprecision(4) << fixed << 50.0; // set amount of places to display (doesn't work for ints)
     cout << endl << setw(5) << right << "50"; // left or right justified
 
     // cin full line
