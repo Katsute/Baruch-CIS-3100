@@ -11,8 +11,8 @@ double subtract(double, double);
 double multiply(double, double);
 double divide(double, double);
 
-void calculatorWrite(ofstream);
-void calculatorRead(ifstream);
+void calculatorWrite(ofstream&);
+void calculatorRead(ifstream&);
 
 string operations = "";
 
@@ -84,11 +84,18 @@ int main()
         cout << endl;
     } while (choice != 5); // break case 5
 
-    fstream IO;
-    IO.open(file);
-
-    calculatorWrite(IO);
-    calculatorRead(IO);
+    { // write
+        ofstream OUT;
+        OUT.open(file);
+        calculatorWrite(OUT);
+        OUT.close();
+    }
+    { // read
+        ifstream IN;
+        IN.open(file);
+        calculatorRead(IN);
+        IN.close();
+    }
     return 0;
 }
 
@@ -123,7 +130,6 @@ double multiply(double x, double y) {
     return v;
 }
 
-// @Nullable
 double divide(double x, double y) {
     double v = NULL;
     if(y != 0){
@@ -136,12 +142,12 @@ double divide(double x, double y) {
     return v;
 }
 
-void calculatorWrite(fstream& OUT) {
+void calculatorWrite(ofstream& OUT) {
     OUT << operations;
 }
 
-void calculatorRead(fstream& IN) {
+void calculatorRead(ifstream& IN) {
     string buffer;
-    while (IN >> buffer)
-        cout << buffer << ' ';
+    while (getline(IN, buffer))
+        cout << buffer << endl;
 }
