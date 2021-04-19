@@ -33,7 +33,7 @@ int main(){
 	// sort
 	int arr1dim[ROW * COL] = {};
 	flatten(myArray, arr1dim); // flatten for sorting
-	bubbleSort(arr1dim, ROW * COL); // osrt
+	bubbleSort(arr1dim, ROW * COL); // sort
 	expand(arr1dim, myArray); // restore grid
 
 	// display
