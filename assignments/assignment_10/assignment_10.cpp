@@ -15,17 +15,20 @@ const int CALCULATIONS = 3;
 
 const string file = "CalculatorOutput.txt";
 void saveCalculations(const Calculation* ptr) {
-    ofstream OUT;
-    OUT.open(file);
-
-    // write existing content
+    // read existing content
     ifstream IN;
     IN.open(file);
     string buffer;
+    string temp = "";
     while (getline(IN, buffer))
-        cout << buffer;
+        temp += buffer + '\n';
+    IN.close();
 
-    // new calculations
+    ofstream OUT;
+    OUT.open(file);
+    OUT << temp; // write existing content
+
+    // append new calculations
     Calculation calc;
     for (int i = 0; i < CALCULATIONS; i++) {
         calc = *(ptr + i);
@@ -34,15 +37,41 @@ void saveCalculations(const Calculation* ptr) {
     OUT.close();
 }
 
-double evaluate(Calculation);
+bool isNumber(const string str) {
+    const int LEN = str.length();
 
+    if (
+        LEN == 0 || // if empty
+        str == "." // or is only decimal (weird edge case)
+    )
+        return false;
+
+    bool containsDec = false;
+    for (int i = 0; i < LEN; i++) {
+        char ch = str.at(i);
+        if (ch == '-' && i > 0) // if negative sign is not first
+            return false;
+        else if (ch == '.')
+            if (containsDec) // if contains more than one decimal
+                return false;
+            else
+                containsDec = true;
+        else if (ch != '-' && ch != '.' && !isdigit(ch)) // if not digit or - or .
+            return false;
+    }
+    return true;
+}
+
+// notable issue: calculations with negative inputs may not work correctly
+//                because the negative sign is treated as a minus symbol
 int main() {
     Calculation myCalculationArray[CALCULATIONS] = {};
 
     bool cont;
-    do{
+    do {
         for(int i = 0; i < CALCULATIONS; i++){
             int pos; // index of opr
+            string n1, n2; // before/after opr
             string IN;
             do{
                 cout << "Enter calculation: " << endl;
@@ -54,15 +83,15 @@ int main() {
                     (pos = IN.find('*')) == string::npos &&
                     (pos = IN.find('/')) == string::npos 
                 ) ||
-                pos == 0 || // no numbers before operator (index 0)
-                pos == IN.length() - 1 // no numbers after operator (last index)
+                !isNumber(n1 = IN.substr(0, pos)) || // str before opr is not number
+                !isNumber(n2 = IN.substr(pos + 1)) // str after opr is not number
             );
 
             // add to arr
             Calculation calc;
             myCalculationArray[i] = calc = {
-                stod(IN.substr(0, pos)), // before opr
-                stod(IN.substr(pos + 1)), // after opr
+                stod(n1), // before opr
+                stod(n2), // after opr
                 IN.at(pos) // opr
             };
 
