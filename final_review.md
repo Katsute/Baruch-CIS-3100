@@ -227,7 +227,7 @@ class Rectangle {
 
     public:
         // default constructor
-        Rectangle() : Rectangle(0, 0) { /* additional code */ } // delegation (aka super))
+        Rectangle() : Rectangle(0, 0) { /* additional code */ } // delegation (aka super)
         Rectangle(double); // overloading
         Rectangle(double, double);
         ~Rectangle(); // destructor, runs right before cleared from memory; no args or return allowed
@@ -244,4 +244,60 @@ Rectangle r(10, 5); // initialization via constructor
 Rectangle rs[1] = {Rectangle()}; // initialization in array
 
 Rectangle rs[1] = {1}; // initialization by literal (only if one param)
+```
+
+### Static
+
+```cpp
+class Obj {
+
+    private:
+        static int v; // static variable
+
+    public:
+        static int getV(); // static method
+
+}
+
+```
+
+### Friend
+
+```cpp
+class Obj {
+
+    void print(); // prototype
+
+}
+
+class Other {
+
+    private:
+        static int c;
+
+        friend class Obj; // allow another class to access private members from this class
+
+        friend void Obj::print(); // allow a single method to access private members from this class
+
+}
+```
+
+### Copy
+
+```cpp
+// copy an object
+Obj a = b;
+
+a = b;
+```
+
+Copy constructor may be needed in the case that a copy needs new pointer variables (since a copy will also copy pointers)
+
+```cpp
+class Obj {
+
+    Obj(const Obj& obj){ } // copy constructor
+
+}
+
 ```
