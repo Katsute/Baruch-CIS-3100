@@ -296,8 +296,51 @@ Copy constructor may be needed in the case that a copy needs new pointer variabl
 ```cpp
 class Obj {
 
-    Obj(const Obj& obj){ } // copy constructor
+    public:
+        Obj(const Obj& obj){ } // copy constructor
 
 }
 
+```
+
+### Operator Overloading
+```cpp
+class Opr {
+
+    public:
+        // override what the operator does
+        Opr operator=(Opr& right);
+        Opr operator+(Opr& right);
+        Opr operator-(Opr& right);
+        Opr operator*(Opr& right);
+        Opr operator/(Opr& right);
+
+        // except:
+        // ?:
+        // .
+        // .*
+        // ::
+        // sizeof
+
+        // streams overloading
+
+        ostream& << (ostream&);
+        istream& >> (istream&);
+
+        // ++ / -- overloading
+
+        Opr operator++(); // opr++
+        Opr operator++(int); // ++opr; int is not used, mainly to differentiate methods
+        Opr operator--(); // opr--
+        Opr operator--(int); // --opr; int is not used, mainly to differentiate methods
+
+        // [] array overloading
+
+        int &operator[](int); // int is index
+
+        // object conversion
+
+        operator int(); // int x = opr;
+
+}
 ```
